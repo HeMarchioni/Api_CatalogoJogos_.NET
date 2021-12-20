@@ -1,4 +1,5 @@
 ﻿using ApiCatalogoJogos.Entities;
+using ApiCatalogoJogos.Exceptions;
 using ApiCatalogoJogos.InputModel;
 using ApiCatalogoJogos.Repositories;
 using ApiCatalogoJogos.ViewModel;
