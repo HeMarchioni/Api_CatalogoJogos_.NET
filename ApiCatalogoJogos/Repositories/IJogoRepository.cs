@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiCatalogoJogos.Repositories
 {
-    public interface IJogoRepository
+    public interface IJogoRepository : IDisposable // ->  IDisposable Ter a capacidade de é liberar recursos não gerenciados (liberar memoria não usada de forma manual)
     {
 
         Task<List<Jogo>> Obter(int pagina, int quantidade);
