@@ -1,3 +1,5 @@
+using ApiCatalogoJogos.Repositories;
+using ApiCatalogoJogos.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,19 @@ namespace ApiCatalogoJogos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IJogoService, JogoService>();   // -> injeção de dependecia do construtor para poder intanciar e trabalhar com a interface (que vai representar a classe definida)
+            services.AddScoped<IJogoRepository, JogoSqlServerRepository>();
+
+
+
+            // CicloDeVida  (Tipos de injeção de Dependencia)
+
+            //services.AddSingleton<IExemploSingleton, ExemploCicloDeVida>();    --> É criada uma unica instancia ela se mantem assim que a aplicação é iniciada
+            //services.AddScoped<IExemploScoped, ExemploCicloDeVida>();          --> É criada uma instancia unica toda vez q a rota do controlador é chamada depois é fechada
+            //services.AddTransient<IExemploTransient, ExemploCicloDeVida>();    --> É criada uma intancia para cada chamada individualmete dentro do controlador depois fechada
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
