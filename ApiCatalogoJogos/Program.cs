@@ -1,7 +1,10 @@
+using ApiCatalogoJogos.Data;
 using ApiCatalogoJogos.Middleware;
 using ApiCatalogoJogos.Repositories;
 using ApiCatalogoJogos.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -31,6 +34,18 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddScoped<IJogoService, JogoService>();   // -> injeção de dependecia do construtor para poder intanciar e trabalhar com a interface (que vai representar a classe definida)
 builder.Services.AddScoped<IJogoRepository, JogoSqlServerRepository>();
+
+
+
+
+var configuration = builder.Configuration;  //-> Obter o IConfiguration para pegar a String de conexão
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(configuration.GetConnectionString("Default"), x => x.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName).EnableRetryOnFailure());
+});
+
 
 
 
