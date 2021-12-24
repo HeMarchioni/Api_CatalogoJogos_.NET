@@ -65,7 +65,7 @@ namespace ApiCatalogoJogos.Controllers.V1
         /// Inserir um jogo no catálogo
         /// </summary>
         /// <param name="jogoInputModel">Dados do jogo a ser inserido</param>
-        /// <response code="200">Cao o jogo seja inserido com sucesso</response>
+        /// <response code="200">Caso o jogo seja inserido com sucesso</response>
         /// <response code="422">Caso já exista um jogo com mesmo nome para a mesma produtora</response>   
         [HttpPost]
         public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
